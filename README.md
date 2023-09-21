@@ -60,7 +60,7 @@ obiektów.
   - [ ] obiekty i pociski mają wizualną reprezentacje
 
 
-## Opis gry do zrealizowania
+## Opis gry
 - [ ] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów
 <details><summary>mockup</summary>
 
@@ -74,13 +74,15 @@ obiektów.
 </details>
 
 - [ ] Po kliknięciu start wszystkie obiekty spawnują się w tym samym czasie
-- [ ] Każdy z obiektów obraca się o losową wartość (0,360) stopni, co losowy czas (0,1) sekund.
-- [ ] Co sekundę każdy z obiektów wystrzeliwuje pocisk skierowany w stronę w którą aktualnie jest obrócony.
-- [ ] Pocisk może trafić w zespawnowany (1 ze 50/100/250/500) obiekt.
-- [ ] Po trafieniu obiekt traci jedno ze swoich żyć i znika z planszy.
-- [ ] Jeżeli obiekt ma więcej niż 1 dostępne życie wraca po 2 sekundach od śmierci na planszę i wykonuje wyżej opisaną mechanikę.
-- [ ] Gra toczy się aż do momentu gdy wszystkie obiekty nie znikną z planszy na zawsze prócz jednego.
-- [ ] Po zakończeniu gry pojawia się Button "Main menu", który pozwala włączyć grę na nowo - wraca do okienka z wyborem liczby obiektów.
+- [ ] Każdy z obiektów obraca się o 0~360 stopni co 0~1 sekund
+> o tyle stopni w każdej osi, czy gra ma być 2D?
+- [ ] Co 1 sekundę każdy z obiektów wystrzeliwuje przed siebie pocisk 
+- [ ] Jeśli pocisk trafi w obiekt:
+  - [ ] obydwoje się despawnują
+  - [ ] obiekt traci 1 życie
+  - [ ] jeżeli obiekt nadal ma więcej niż 1 życie, respawnuje się po 2 sekundach
+- [ ] Gra kończy się jak zostanie tylko 1 obiekt
+- [ ] Po zakończeniu gry pojawia się przycisk "Main menu", który wraca do wyboru liczby obiektów
 <details><summary>mockup</summary>
   
 ![Mockup3](https://github.com/Vheos/Interview.Naptime/assets/9155825/cdf16ff1-ca2c-45d1-aa4e-780e4fbeae5f)
