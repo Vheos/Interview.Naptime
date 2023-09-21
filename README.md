@@ -59,9 +59,20 @@ obiektów.
   - [ ] posiada 3 życia
   - [ ] obiekty i pociski mają wizualną reprezentacje
 
-## Opis gry do zrealizowania:
-- [ ] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów (50, 100, 250, 500) - widocznym na mockupie
-- [ ] Po wyborze liczby obiektów udostępnia się możliwość rozgrywki (jak na mockupie)
+
+## Opis gry do zrealizowania
+- [ ] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów
+<details><summary>mockup</summary>
+
+![Mockup1](https://github.com/Vheos/Interview.Naptime/assets/9155825/42ba144e-8053-461d-97ab-60379d3c3442)  
+</details>
+
+- [ ] Po wyborze liczby obiektów udostępnia się możliwość rozgrywki
+<details><summary>mockup</summary>
+
+![Mockup2](https://github.com/Vheos/Interview.Naptime/assets/9155825/e36ded54-2f66-4f2a-8c11-815e6c168736)
+</details>
+
 - [ ] Po kliknięciu start wszystkie obiekty spawnują się w tym samym czasie
 - [ ] Każdy z obiektów obraca się o losową wartość (0,360) stopni, co losowy czas (0,1) sekund.
 - [ ] Co sekundę każdy z obiektów wystrzeliwuje pocisk skierowany w stronę w którą aktualnie jest obrócony.
@@ -69,4 +80,9 @@ obiektów.
 - [ ] Po trafieniu obiekt traci jedno ze swoich żyć i znika z planszy.
 - [ ] Jeżeli obiekt ma więcej niż 1 dostępne życie wraca po 2 sekundach od śmierci na planszę i wykonuje wyżej opisaną mechanikę.
 - [ ] Gra toczy się aż do momentu gdy wszystkie obiekty nie znikną z planszy na zawsze prócz jednego.
-- [ ] Po zakończeniu gry pojawia się Button "Main menu", który pozwala włączyć grę na nowo (jak na mockupie) - wraca do okienka z wyborem liczby obiektów.
+- [ ] Po zakończeniu gry pojawia się Button "Main menu", który pozwala włączyć grę na nowo - wraca do okienka z wyborem liczby obiektów.
+<details><summary>mockup</summary>
+  
+![Mockup3](https://github.com/Vheos/Interview.Naptime/assets/9155825/cdf16ff1-ca2c-45d1-aa4e-780e4fbeae5f)
+</details>
+
