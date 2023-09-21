@@ -45,23 +45,19 @@ grę na nowo (jak na mockupie) - wraca do okienka z wyborem liczby
 obiektów.
 </details>
 
-## Wersja Unity:
+## Wersja Unity
 - [x] 2022.3.4f1
 - [ ] 2022.3.0f1
 - [ ] 2021.3.28f1
 
-## Wytyczne:
-- [ ] gra nie musi posiadać assetów innych niż te dostarczone, elementy
-gamepleyowe mogą zostać stworzone na assetach standardowo dostępnych w
-Unity
-- [ ] UI ma zostać zbudowane TYLKO z elementów dostarczonych
-- [ ] gra nie musi posiadać muzyki/dźwięków
-- [ ] obiekt posiada 3 życia
-- [ ] każdy obiekt spawnuje się w losowym (widocznym) miejscu na planszy
-- [ ] pierwsza pozycja spawnu NIE MUSI równać się każdym kolejnym pozycjom tego samego obiektu po stracie życia
-- [ ] obiekty NIE POWINNY się stykać
-- [ ] nie liczą się efekty wizualne w gameplayu a optymalizacja działania gry
-- [ ] zarówno obiekt, jak i jego pocisk musi mieć swoją wizualną reprezentację
+## Wytyczne
+- [ ] UI tylko z dostarczonych assetów
+- [ ] oceniana będzie optymalizacja
+- [ ] obiekt
+  - [ ] spawnuje się w losowym widocznym miejscu
+  - [ ] nie dotyka innych obiektów
+  - [ ] posiada 3 życia
+  - [ ] obiekty i pociski mają wizualną reprezentacje
 
 ## Opis gry do zrealizowania:
 - [ ] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów (50, 100, 250, 500) - widocznym na mockupie
