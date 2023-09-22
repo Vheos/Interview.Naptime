@@ -1,15 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(ToggleGroup))]
 public class CubeToggleGroup : MonoBehaviour
 {
 	[SerializeField] CubeToggle cubeTogglePrefab;
-	[SerializeField] UISettings settings;
 	private List<CubeToggle> toggles;
+	public event Action<CubeToggle, CubeToggle> OnToggleChanged;
+	public CubeToggle ActiveToggle { get; private set; }
+
 
 	private void Awake()
 	{
@@ -19,8 +23,8 @@ public class CubeToggleGroup : MonoBehaviour
 
 		toggles = new List<CubeToggle>();
 		ToggleGroup toggleGroup = GetComponent<ToggleGroup>();
-		int[] amounts = settings.CubeToggleAmounts;
-		Color[] colors = settings.CubeToggleIconColors;
+		int[] amounts = Settings.UI.CubeToggleAmounts;
+		Color[] colors = Settings.UI.CubeToggleIconColors;
 
 		// Instantiate and initialize new toggles
 		for (int i = 0; i < amounts.Length; i++)
@@ -31,11 +35,17 @@ public class CubeToggleGroup : MonoBehaviour
 			if (i < colors.Length)
 				newToggle.CubeColor = colors[i];
 
+			newToggle.AddCallbackOnStateChanged(state => InvokeOnToggleChanged(newToggle, state));
 			toggles.Add(newToggle);
 		}
+	}
+	private void InvokeOnToggleChanged(CubeToggle toggle, bool state)
+	{
+		CubeToggle previousActiveToggle = ActiveToggle;
+		ActiveToggle = toggles.FirstOrDefault(t => t.State);
+		if (ActiveToggle == previousActiveToggle)
+			return;
 
-		// Set shared properties
-		if (toggles.Any())
-			toggles.First().SharedTextShadowColor = settings.FontShadow;
+		OnToggleChanged?.Invoke(previousActiveToggle, ActiveToggle);
 	}
 }
