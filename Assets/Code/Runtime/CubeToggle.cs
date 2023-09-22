@@ -1,22 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Toggle))]
+[RequireComponent(typeof(Image))]
 public class CubeToggle : MonoBehaviour
 {
 	[SerializeField] Image icon;
 	[SerializeField] TMP_Text text;
-	private Toggle toggle;
-	private int amount;
+	[SerializeField] Sprite selectedSprite;
 
-	private void Awake()
-	{
-		toggle = GetComponent<Toggle>();
-		toggle.onValueChanged.AddListener(x => Debug.Log(x));
-	}
+	private Toggle toggle;
+	private Image image;
+	private Sprite originalSprite;
+	private int amount;
 
 	public ToggleGroup ToggleGroup
 	{
@@ -28,11 +29,6 @@ public class CubeToggle : MonoBehaviour
 		get => icon.color;
 		set => icon.color = value;
 	}
-	public Color SharedTextShadowColor
-	{
-		get => text.fontSharedMaterial.GetColor(ShaderUtilities.ID_UnderlayColor);
-		set => text.fontSharedMaterial.SetColor(ShaderUtilities.ID_UnderlayColor, value);
-	}
 	public int Amount
 	{
 		get => amount;
@@ -42,5 +38,31 @@ public class CubeToggle : MonoBehaviour
 			text.text = amount.ToString();
 		}
 	}
+	public bool State
+	{
+		get => toggle.isOn;
+		set => toggle.isOn = value;
+	}
+	public void AddCallbackOnStateChanged(UnityAction<bool> callback)
+		=> toggle.onValueChanged.AddListener(callback);
 
+	private void OnToggle(bool state)
+	{
+		Vector3 targetScale = Vector3.one;
+		if (state)
+			targetScale *= Settings.UI.SelectedToggleScale;
+		transform.localScale = targetScale;
+
+		image.sprite = state ? selectedSprite : originalSprite;
+	}
+
+	private void Awake()
+	{
+		toggle = GetComponent<Toggle>();
+		image = GetComponent<Image>();
+		originalSprite = image.sprite;
+
+		text.fontSharedMaterial.SetColor(ShaderUtilities.ID_UnderlayColor, Settings.UI.FontShadow);
+		AddCallbackOnStateChanged(OnToggle);
+	}
 }
