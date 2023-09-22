@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
+		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);		
 	}
 
 	static private GameManager instance;
