@@ -51,7 +51,7 @@ obiektów.
 - [ ] 2021.3.28f1
 
 ## Wytyczne
-- [ ] UI tylko z dostarczonych assetów
+- [x] UI tylko z dostarczonych assetów
 - [ ] oceniana będzie optymalizacja
 - [ ] obiekt
   - [ ] spawnuje się w losowym widocznym miejscu
@@ -61,13 +61,13 @@ obiektów.
 
 
 ## Opis gry
-- [ ] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów
+- [x] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów
 <details><summary>mockup</summary>
 
 ![Mockup1](https://github.com/Vheos/Interview.Naptime/assets/9155825/42ba144e-8053-461d-97ab-60379d3c3442)  
 </details>
 
-- [ ] Po wyborze liczby obiektów udostępnia się możliwość rozgrywki
+- [x] Po wyborze liczby obiektów udostępnia się możliwość rozgrywki
 <details><summary>mockup</summary>
 
 ![Mockup2](https://github.com/Vheos/Interview.Naptime/assets/9155825/e36ded54-2f66-4f2a-8c11-815e6c168736)
