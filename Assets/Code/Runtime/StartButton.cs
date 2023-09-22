@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,14 +14,16 @@ public class StartButton : MonoBehaviour
 
 	private void Awake()
 	{		
-		button = GetComponent<Button>();
-		OnCubeToggleChanged(null, cubeToggleGroup.ActiveToggle);
+		button = GetComponent<Button>();		
 	}
 
 	private void OnEnable()
 	{
 		cubeToggleGroup.OnToggleChanged += OnCubeToggleChanged;
+		button.onClick.AddListener(OnButtonClicked);
+		OnCubeToggleChanged(null, cubeToggleGroup.ActiveToggle);
 	}
+
 
 	private void OnDisable()
 	{
@@ -32,5 +35,12 @@ public class StartButton : MonoBehaviour
 		bool state = currentToggle != null;
 		button.interactable = state;
 		icon.enabled = state;
+	}
+
+	private void OnButtonClicked()
+	{
+		int cubesToSpawn = cubeToggleGroup.ActiveToggle.Amount;
+		GameManager.StartGame(cubesToSpawn);
+
 	}
 }
