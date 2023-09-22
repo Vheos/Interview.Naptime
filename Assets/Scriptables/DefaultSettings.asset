@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008092ae948d4c4468e46db057a2e385, type: 3}
+  m_Name: DefaultSettings
+  m_EditorClassIdentifier: 
+  <FontShadow>k__BackingField: {r: 0.050980393, g: 0.0627451, b: 0.24705882, a: 0.5019608}
+  <MainBackground>k__BackingField: {r: 0.5764706, g: 0.8, b: 1, a: 1}
+  <GameOverBar>k__BackingField: {r: 0, g: 0.50980395, b: 0.90588236, a: 1}
+  <CubeToggleAmounts>k__BackingField: 3200000064000000fa000000f4010000
+  <CubeToggleIconColors>k__BackingField:
+  - {r: 0.0627451, g: 0.7137255, b: 1, a: 1}
+  - {r: 0.65882355, g: 1, b: 0.0627451, a: 1}
+  - {r: 1, g: 0.7254902, b: 0.0627451, a: 1}
+  - {r: 1, g: 0.29803923, b: 0.0627451, a: 1}
