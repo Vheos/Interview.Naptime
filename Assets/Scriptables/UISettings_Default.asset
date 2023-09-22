@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 008092ae948d4c4468e46db057a2e385, type: 3}
-  m_Name: DefaultSettings
+  m_Name: UISettings_Default
   m_EditorClassIdentifier: 
   <FontShadow>k__BackingField: {r: 0.050980393, g: 0.0627451, b: 0.24705882, a: 0.5019608}
   <MainBackground>k__BackingField: {r: 0.5764706, g: 0.8, b: 1, a: 1}
@@ -21,3 +21,4 @@ MonoBehaviour:
   - {r: 0.65882355, g: 1, b: 0.0627451, a: 1}
   - {r: 1, g: 0.7254902, b: 0.0627451, a: 1}
   - {r: 1, g: 0.29803923, b: 0.0627451, a: 1}
+  <SelectedToggleScale>k__BackingField: 1.1
