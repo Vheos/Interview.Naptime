@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Canvas))]
-public class RootCanvas : MonoBehaviour
+public class CanvasManager : MonoBehaviour
 {
 	[SerializeField] private Canvas startMenuCanvas;
 	[SerializeField] private Canvas gameOverCanvas;
@@ -32,7 +32,7 @@ public class RootCanvas : MonoBehaviour
 			_ => null,
 		};
 
-		if(visibleCanvas == null)
+		if (visibleCanvas == null)
 		{
 			IsVisible = false;
 			return;
