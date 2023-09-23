@@ -5,11 +5,10 @@ using UnityEngine.Pool;
 
 public abstract class AComponentPool<T> : MonoBehaviour where T : MonoBehaviour
 {
-	[SerializeField] T prefab;
-
+	abstract protected T Prefab { get; }
+	abstract protected int MaxActive { get; }
 	private ObjectPool<T> pool;
 	private GameObject holder;
-	abstract protected int MaxActive { get; }
 
 	private HashSet<T> activeComponents;
 	public IReadOnlyCollection<T> ActiveComponents
@@ -22,7 +21,7 @@ public abstract class AComponentPool<T> : MonoBehaviour where T : MonoBehaviour
 		if (holder == null)
 			holder = new GameObject(this.GetType().Name);
 
-		T newShooter = Instantiate(prefab, holder.transform);
+		T newShooter = Instantiate(Prefab, holder.transform);
 		return newShooter;
 	}
 	virtual protected void GetFunc(T component)
