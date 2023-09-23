@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,9 +7,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class CubeToggle : MonoBehaviour
 {
-	[SerializeField] Image icon;
-	[SerializeField] TMP_Text text;
-	[SerializeField] Sprite selectedSprite;
+	[SerializeField] private Image icon;
+	[SerializeField] private TMP_Text text;
+	[SerializeField] private Sprite selectedSprite;
 
 	private Toggle toggle;
 	private Image image;

@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Shooter : MonoBehaviour
 {
-	[SerializeField] new SphereCollider collider;
-	[SerializeField] Transform bulletSpawnPoint;
-	
+	[SerializeField] private new SphereCollider collider;
+	[SerializeField] private Transform bulletSpawnPoint;
+
 	private int health;
 	public int Health
 	{

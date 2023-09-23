@@ -2,20 +2,16 @@ using Assets.Code.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField, Range(0.1f, 10f)] float timeScale;
-	[SerializeField] new Camera camera;
-	[SerializeField] CanvasManager rootCanvas;
-	[SerializeField] ShooterPool shooterPool;
-	[SerializeField] BulletPool bulletPool;
+	[SerializeField, Range(0.1f, 10f)] private float timeScale;
+	[SerializeField] private new Camera camera;
+	[SerializeField] private CanvasManager rootCanvas;
+	[SerializeField] private ShooterPool shooterPool;
+	[SerializeField] private BulletPool bulletPool;
 
 	private void Awake()
 	{
@@ -28,16 +24,16 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = timeScale;
 	}
 
-	static private GameManager instance;
-	static public int ShooterLayerMask { get; private set; }
+	private static GameManager instance;
+	public static int ShooterLayerMask { get; private set; }
 
 	private void AddScene(SceneName sceneName) =>
 	SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Additive);
-	static public void ShowMainMenu()
+	public static void ShowMainMenu()
 	{
 		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
 	}
-	static public void StartGame(int shootersToSpawn)
+	public static void StartGame(int shootersToSpawn)
 	{
 		instance.rootCanvas.ChangeScreen(UIScreen.None);
 		ActivateScene(SceneName.Game);
@@ -51,7 +47,7 @@ public class GameManager : MonoBehaviour
 		float cameraDistance = Helpers.CameraDistance(targetFrustumHeight, instance.camera.fieldOfView);
 		instance.camera.SetDistance(Vector3.zero, cameraDistance);
 	}
-	static private IEnumerator SpawnShootersCoroutine(IEnumerable<Vector2> spawnPoints, float spawnInterval)
+	private static IEnumerator SpawnShootersCoroutine(IEnumerable<Vector2> spawnPoints, float spawnInterval)
 	{
 		foreach (var spawnPoint in spawnPoints)
 		{
@@ -60,12 +56,12 @@ public class GameManager : MonoBehaviour
 				yield return new WaitForSeconds(spawnInterval);
 		}
 	}
-	static private void CheckEndGame()
+	private static void CheckEndGame()
 	{
 		if (instance.shooterPool.ActiveComponentsCount <= 1)
 			EndGame();
 	}
-	static private void EndGame()
+	private static void EndGame()
 	{
 		instance.shooterPool.ReleaseAll();
 		instance.bulletPool.ReleaseAll();
@@ -73,19 +69,19 @@ public class GameManager : MonoBehaviour
 		ActivateScene(SceneName.Persistent);
 		instance.rootCanvas.ChangeScreen(UIScreen.GameOver);
 	}
-	static private void ActivateScene(SceneName sceneName)
+	private static void ActivateScene(SceneName sceneName)
 	{
 		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
 		SceneManager.SetActiveScene(gameScene);
 	}
-	static private Shooter SpawnShooter(Vector3 position)
+	private static Shooter SpawnShooter(Vector3 position)
 	{
 		Shooter newShooter = instance.shooterPool.Get();
 		newShooter.transform.position = position;
 		newShooter.OnDeath += CheckEndGame;
 		return newShooter;
 	}
-	static public Bullet SpawnBullet(Vector3 position, Vector3 direction)
+	public static Bullet SpawnBullet(Vector3 position, Vector3 direction)
 	{
 		Bullet newBullet = instance.bulletPool.Get();
 		newBullet.transform.position = position;
@@ -93,15 +89,15 @@ public class GameManager : MonoBehaviour
 		return newBullet;
 	}
 
-	static public void Despawn(Shooter shooter)
+	public static void Despawn(Shooter shooter)
 		=> instance.shooterPool.Release(shooter);
-	static public void Despawn(Bullet bullet)
+	public static void Despawn(Bullet bullet)
 		=> instance.bulletPool.Release(bullet);
-	static public new Coroutine StartCoroutine(IEnumerator enumerator)
+	public static new Coroutine StartCoroutine(IEnumerator enumerator)
 		=> ((MonoBehaviour)instance).StartCoroutine(enumerator);
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-	static private void StaticInitialize()
+	private static void StaticInitialize()
 	{
 		instance = null;
 		ShooterLayerMask = LayerMask.GetMask(Layers.Shooter.ToString());

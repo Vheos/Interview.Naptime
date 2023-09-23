@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	[SerializeField] new SphereCollider collider;
+	[SerializeField] private new SphereCollider collider;
 
 	private float despawnTime;
 	private Vector3 direction;

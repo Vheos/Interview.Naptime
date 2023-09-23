@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public abstract class AComponentPool<T> : MonoBehaviour where T : MonoBehaviour
 {
-	abstract protected T Prefab { get; }
-	abstract protected int MaxActive { get; }
+	protected abstract T Prefab { get; }
+	protected abstract int MaxActive { get; }
 	private ObjectPool<T> pool;
 	private GameObject holder;
 
@@ -16,19 +15,19 @@ public abstract class AComponentPool<T> : MonoBehaviour where T : MonoBehaviour
 	public int ActiveComponentsCount
 	=> pool.CountActive;
 
-	virtual protected T CreateFunc()
+	protected virtual T CreateFunc()
 	{
 		if (holder == null)
-			holder = new GameObject(this.GetType().Name);
+			holder = new GameObject(GetType().Name);
 
 		T newShooter = Instantiate(Prefab, holder.transform);
 		return newShooter;
 	}
-	virtual protected void GetFunc(T component)
+	protected virtual void GetFunc(T component)
 		=> component.gameObject.SetActive(true);
-	virtual protected void ReleaseFunc(T component)
+	protected virtual void ReleaseFunc(T component)
 		=> component.gameObject.SetActive(false);
-	virtual protected void DestroyFunc(T component)
+	protected virtual void DestroyFunc(T component)
 		=> Destroy(component.gameObject);
 
 	public T Get()
