@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9df5affabd6ecdc4ea3cd34c67c00119, type: 3}
-  m_Name: GameSettings_Default
+  m_Name: Game_Default
   m_EditorClassIdentifier: 
   <ShooterPrefab>k__BackingField: {fileID: 3938704564891666966, guid: d8b747efd5aa3394eb6fb49f02d28fb1, type: 3}
   <ShooterHealth>k__BackingField: 3
