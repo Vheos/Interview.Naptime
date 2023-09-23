@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
+		AddScene(SceneName.Game);
 		ShowMainMenu();
 	}
 	private void FixedUpdate()
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
 	static private GameManager instance;
 	static public int ShooterLayerMask { get; private set; }
 
+	private void AddScene(SceneName sceneName) =>
+	SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Additive);
 	static public void ShowMainMenu()
 	{
 		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
@@ -103,6 +106,4 @@ public class GameManager : MonoBehaviour
 		instance = null;
 		ShooterLayerMask = LayerMask.GetMask(Layers.Shooter.ToString());
 	}
-
-
 }
