@@ -4,17 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
 public class StartButton : MonoBehaviour
 {
-	[SerializeField] CubeToggleGroup cubeToggleGroup;
+	[SerializeField] Button button;
 	[SerializeField] Image icon;
-	private Button button;
+	[SerializeField] CubeToggleGroup cubeToggleGroup;
 
-
-	private void Awake()
-	{		
-		button = GetComponent<Button>();
+	private void OnCubeToggleChanged(CubeToggle previousToggle, CubeToggle currentToggle)
+	{
+		bool state = currentToggle != null;
+		button.interactable = state;
+		icon.enabled = state;
+	}
+	private void OnButtonClicked()
+	{
+		int cubesToSpawn = cubeToggleGroup.ActiveToggle.Amount;
+		GameManager.StartGame(cubesToSpawn);
 	}
 
 	private void OnEnable()
@@ -23,23 +28,9 @@ public class StartButton : MonoBehaviour
 		button.onClick.AddListener(OnButtonClicked);
 		OnCubeToggleChanged(null, cubeToggleGroup.ActiveToggle);
 	}
-
 	private void OnDisable()
 	{
 		cubeToggleGroup.OnToggleChanged -= OnCubeToggleChanged;
 		button.onClick.RemoveListener(OnButtonClicked);
-	}
-
-	private void OnCubeToggleChanged(CubeToggle previousToggle, CubeToggle currentToggle)
-	{
-		bool state = currentToggle != null;
-		button.interactable = state;
-		icon.enabled = state;
-	}
-
-	private void OnButtonClicked()
-	{
-		int cubesToSpawn = cubeToggleGroup.ActiveToggle.Amount;
-		GameManager.StartGame(cubesToSpawn);
 	}
 }

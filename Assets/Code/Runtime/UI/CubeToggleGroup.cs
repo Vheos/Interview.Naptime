@@ -22,14 +22,11 @@ public class CubeToggleGroup : MonoBehaviour
 
 		OnToggleChanged?.Invoke(previousActiveToggle, ActiveToggle);
 	}
+
 	private void Awake()
 	{
 		ToggleGroup toggleGroup = GetComponent<ToggleGroup>();
 		toggles = new List<CubeToggle>();
-
-		// Destroy placeholder toggles
-		for (int i = transform.childCount - 1; i >= 0; i--)
-			DestroyImmediate(transform.GetChild(i).gameObject);
 
 		// Cache settings
 		int[] amounts = Settings.UI.CubeToggleAmounts;
@@ -48,5 +45,10 @@ public class CubeToggleGroup : MonoBehaviour
 			newToggle.AddCallbackOnStateChanged(state => InvokeOnToggleChanged(newToggle, state));
 			toggles.Add(newToggle);
 		}
+	}
+	private void OnEnable()
+	{
+		if (ActiveToggle != null)
+			ActiveToggle.State = false;
 	}
 }
