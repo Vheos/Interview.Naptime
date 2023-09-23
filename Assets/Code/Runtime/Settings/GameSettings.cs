@@ -12,6 +12,7 @@ public class GameSettings : ScriptableObject
 	[field: SerializeField] public Vector2 ShooterRotateInterval { get; private set; }
 	[field: SerializeField, Range(0.5f, 2f)] public float ShooterShootInterval { get; private set; }
 	[field: SerializeField, Range(0f, 5f)] public float ShooterRespawnInterval { get; private set; }
+	[field: SerializeField, Range(0f, 1f)] public float ShooterSpawnInterval { get; private set; }
 
 
 	[field: Header("Bullet")]
