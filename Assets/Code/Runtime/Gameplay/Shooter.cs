@@ -25,7 +25,6 @@ public class Shooter : MonoBehaviour
 				GameManager.StartCoroutine(TakeDamageCoroutine());
 		}
 	}
-
 	private float nextRotateTime;
 	private float nextShootTime;
 
@@ -42,7 +41,6 @@ public class Shooter : MonoBehaviour
 	}
 	private void UpdateNextShootTime()
 		=> nextShootTime = Time.time + Settings.Game.ShooterShootInterval;
-
 	private void CheckRotate()
 	{
 		if (Time.time < nextRotateTime)
@@ -58,11 +56,9 @@ public class Shooter : MonoBehaviour
 		if (Time.time < nextShootTime)
 			return;
 
-		Bullet newBullet = GameManager.SpawnBullet();
-		newBullet.Initialize(bulletSpawnPoint.position, transform.forward);
+		GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward);
 		UpdateNextShootTime();
 	}
-
 	private IEnumerator TakeDamageCoroutine()
 	{
 		if (Health <= 0)

@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	private Vector3 direction;
 	private float despawnTime;
-
-	public void Initialize(Vector3 position, Vector3 direction)
+	private Vector3 direction;
+	public Vector3 Direction
 	{
-		transform.position = position;
-		this.direction = direction.normalized;
-		despawnTime = Time.time + Settings.Game.BulletLifetime;
+		get => direction;
+		set
+		{
+			if (value == Vector3.zero)
+				return;
+
+			direction = value.normalized;
+		}
 	}
-	private void Move()
-		=> transform.position += Time.deltaTime * Settings.Game.BulletSpeed * direction;
+
+	private void UpdateDespawnTime()
+	=> despawnTime = Time.time + Settings.Game.BulletLifetime;
 	private bool CheckDespawn()
 	{
 		if (Time.time < despawnTime)
@@ -23,7 +28,8 @@ public class Bullet : MonoBehaviour
 		GameManager.Despawn(this);
 		return true;
 	}
-
+	private void Move()
+		=> transform.position += Time.deltaTime * Settings.Game.BulletSpeed * direction;
 	private bool CheckHit()
 	{
 		if (!Physics.CheckSphere(transform.position, Settings.Game.BulletRadius, GameManager.ShooterLayerMask))
@@ -38,6 +44,10 @@ public class Bullet : MonoBehaviour
 		return true;
 	}
 
+	private void OnEnable()
+	{
+		UpdateDespawnTime();
+	}
 	private void Update()
 	{
 		if (CheckDespawn())
@@ -45,7 +55,6 @@ public class Bullet : MonoBehaviour
 
 		Move();
 	}
-
 	private void FixedUpdate()
 	{
 		CheckHit();
