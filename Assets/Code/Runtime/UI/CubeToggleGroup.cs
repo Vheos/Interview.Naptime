@@ -48,8 +48,5 @@ public class CubeToggleGroup : MonoBehaviour
 			newToggle.AddCallbackOnStateChanged(state => InvokeOnToggleChanged(newToggle, state));
 			toggles.Add(newToggle);
 		}
-
-		// Debug
-		toggles.First().State = true;
 	}
 }

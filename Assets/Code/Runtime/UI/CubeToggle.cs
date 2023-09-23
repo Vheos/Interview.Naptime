@@ -46,7 +46,7 @@ public class CubeToggle : MonoBehaviour
 	public void AddCallbackOnStateChanged(UnityAction<bool> callback)
 		=> toggle.onValueChanged.AddListener(callback);
 
-	private void OnToggle(bool state)
+	private void AnimateToggle(bool state)
 	{
 		Vector3 targetScale = Vector3.one;
 		if (state)
@@ -63,6 +63,6 @@ public class CubeToggle : MonoBehaviour
 		originalSprite = image.sprite;
 
 		text.fontSharedMaterial.SetColor(ShaderUtilities.ID_UnderlayColor, Settings.UI.FontShadow);
-		AddCallbackOnStateChanged(OnToggle);
+		AddCallbackOnStateChanged(AnimateToggle);
 	}
 }
