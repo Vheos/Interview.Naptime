@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18386999, g: 0.22901669, b: 0.30311197, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -757,6 +757,8 @@ GameObject:
   - component: {fileID: 989108355}
   - component: {fileID: 989108356}
   - component: {fileID: 989108354}
+  - component: {fileID: 989108357}
+  - component: {fileID: 989108358}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -805,7 +807,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51666d93e4533a34eaf820cd044ed053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeScale: 1
   rootCanvas: {fileID: 381111927}
+  shooterPool: {fileID: 989108357}
+  bulletPool: {fileID: 989108358}
+--- !u!114 &989108357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989108353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8b6a922461e2f4495229b6546e4fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3938704564891666966, guid: d8b747efd5aa3394eb6fb49f02d28fb1, type: 3}
+--- !u!114 &989108358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989108353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8330afe0b359485498704314aca23d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 254529161373585011, guid: 67752b06c518cb145b903cbe3509606d, type: 3}
 --- !u!1 &1065680315
 GameObject:
   m_ObjectHideFlags: 0
