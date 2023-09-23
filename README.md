@@ -53,11 +53,11 @@ obiektów.
 ## Wytyczne
 - [x] UI tylko z dostarczonych assetów
 - [ ] oceniana będzie optymalizacja
-- [ ] obiekt
-  - [ ] spawnuje się w losowym widocznym miejscu
-  - [ ] nie dotyka innych obiektów
-  - [ ] posiada 3 życia
-  - [ ] obiekty i pociski mają wizualną reprezentacje
+- [x] obiekt:
+  - [x] spawnuje się w losowym widocznym miejscu
+  - [x] nie dotyka innych obiektów
+  - [x] posiada 3 życia
+  - [x] obiekty i pociski mają wizualną reprezentacje
 
 
 ## Opis gry
@@ -73,15 +73,14 @@ obiektów.
 ![Mockup2](https://github.com/Vheos/Interview.Naptime/assets/9155825/e36ded54-2f66-4f2a-8c11-815e6c168736)
 </details>
 
-- [ ] Po kliknięciu start wszystkie obiekty spawnują się w tym samym czasie
-- [ ] Każdy z obiektów obraca się o 0~360 stopni co 0~1 sekund
-> o tyle stopni w każdej osi, czy gra ma być 2D?
-- [ ] Co 1 sekundę każdy z obiektów wystrzeliwuje przed siebie pocisk 
-- [ ] Jeśli pocisk trafi w obiekt:
-  - [ ] obydwoje się despawnują
-  - [ ] obiekt traci 1 życie
-  - [ ] jeżeli obiekt nadal ma więcej niż 1 życie, respawnuje się po 2 sekundach
-- [ ] Gra kończy się jak zostanie tylko 1 obiekt
+- [x] Po kliknięciu start wszystkie obiekty spawnują się w tym samym czasie
+- [x] Każdy z obiektów obraca się o 0-360 stopni co 0-1 sekund
+- [x] Co 1 sekundę każdy z obiektów wystrzeliwuje przed siebie pocisk 
+- [x] Jeśli pocisk trafi w obiekt:
+  - [x] obydwoje się despawnują
+  - [x] obiekt traci 1 życie
+  - [x] jeżeli obiekt nadal ma więcej niż 1 życie, respawnuje się po 2 sekundach
+- [x] Gra kończy się jak zostanie tylko 1 obiekt
 - [ ] Po zakończeniu gry pojawia się przycisk "Main menu", który wraca do wyboru liczby obiektów
 <details><summary>mockup</summary>
   
