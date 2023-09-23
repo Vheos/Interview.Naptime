@@ -53,9 +53,9 @@ obiektów.
 ## Wytyczne
 - [x] UI tylko z dostarczonych assetów
 - [ ] oceniana będzie optymalizacja
-- [ ] obiekt:
-  - [ ] spawnuje się w losowym widocznym miejscu
-  - [ ] nie dotyka innych obiektów
+- [x] obiekt:
+  - [x] spawnuje się w losowym widocznym miejscu
+  - [x] nie dotyka innych obiektów
   - [x] posiada 3 życia
   - [x] obiekty i pociski mają wizualną reprezentacje
 
