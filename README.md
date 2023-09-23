@@ -81,9 +81,11 @@ obiektów.
   - [x] obiekt traci 1 życie
   - [x] jeżeli obiekt nadal ma więcej niż 1 życie, respawnuje się po 2 sekundach
 - [x] Gra kończy się jak zostanie tylko 1 obiekt
-- [ ] Po zakończeniu gry pojawia się przycisk "Main menu", który wraca do wyboru liczby obiektów
+- [x] Po zakończeniu gry pojawia się przycisk "Main menu", który wraca do wyboru liczby obiektów
 <details><summary>mockup</summary>
   
 ![Mockup3](https://github.com/Vheos/Interview.Naptime/assets/9155825/cdf16ff1-ca2c-45d1-aa4e-780e4fbeae5f)
 </details>
 
+## Komentarz
+- ...
