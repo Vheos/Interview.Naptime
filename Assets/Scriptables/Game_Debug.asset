@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df5affabd6ecdc4ea3cd34c67c00119, type: 3}
+  m_Name: Game_Debug
+  m_EditorClassIdentifier: 
+  <ShooterPrefab>k__BackingField: {fileID: 3938704564891666966, guid: d8b747efd5aa3394eb6fb49f02d28fb1, type: 3}
+  <ShooterHealth>k__BackingField: 1
+  <ShooterRotateAngle>k__BackingField: {x: -90, y: 90}
+  <ShooterRotateInterval>k__BackingField: {x: 0.5, y: 0.5}
+  <ShooterShootInterval>k__BackingField: 0.5
+  <ShooterRespawnInterval>k__BackingField: 1
+  <ShooterSpawnInterval>k__BackingField: 1e-32
+  <BulletPrefab>k__BackingField: {fileID: 254529161373585011, guid: 67752b06c518cb145b903cbe3509606d, type: 3}
+  <BulletSpeed>k__BackingField: 10
+  <BulletRadius>k__BackingField: 0
+  <BulletLifetime>k__BackingField: 5
