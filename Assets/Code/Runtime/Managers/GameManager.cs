@@ -1,15 +1,19 @@
+using Assets.Code.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
 	[SerializeField, Range(0.1f, 10f)] float timeScale;
-	[SerializeField] RootCanvas rootCanvas;
+	[SerializeField] new Camera camera;
+	[SerializeField] CanvasManager rootCanvas;
 	[SerializeField] ShooterPool shooterPool;
 	[SerializeField] BulletPool bulletPool;
 
@@ -24,6 +28,8 @@ public class GameManager : MonoBehaviour
 	}
 
 	static private GameManager instance;
+	private static int cameraDistance;
+
 	static public int ShooterLayerMask { get; private set; }
 
 	static private void ActivateScene(SceneName sceneName)
@@ -36,13 +42,24 @@ public class GameManager : MonoBehaviour
 		instance.rootCanvas.ChangeScreen(UIScreen.None);
 		ActivateScene(SceneName.Game);
 
-		for (int i = 0; i < shootersToSpawn; i++)
-		{
-			SpawnShooter();
-		}
+		float shooterRadius = Settings.Game.ShooterPrefab.Collider.radius;
+		Helpers.FindSpawnPoints2D(shootersToSpawn, shooterRadius, shooterRadius, shooterRadius / 2f, out var spawnPoints, out var maxSpawnRadius);
+
+		StartCoroutine(SpawnShootersCoroutine(spawnPoints.Select(v => (Vector3)v), Settings.Game.ShooterSpawnInterval));
+
+		float cameraDistance = Helpers.CameraDistance(maxSpawnRadius * 2, instance.camera.fieldOfView);
+		instance.camera.SetDistance(Vector3.zero, cameraDistance);
 	}
 
-
+	static private IEnumerator SpawnShootersCoroutine(IEnumerable<Vector3> spawnPoints, float spawnInterval)
+	{
+		foreach (var spawnPoint in spawnPoints)
+		{
+			SpawnShooter(spawnPoint);
+			if (spawnInterval > 0)
+				yield return new WaitForSeconds(spawnInterval);
+		}
+	}
 
 	static private void CheckEndGame()
 	{
@@ -58,10 +75,10 @@ public class GameManager : MonoBehaviour
 		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
 	}
 
-	private static Shooter SpawnShooter()
+	private static Shooter SpawnShooter(Vector3 position)
 	{
 		Shooter newShooter = instance.shooterPool.Get();
-		newShooter.transform.position = Random.insideUnitCircle * 10f;
+		newShooter.transform.position = position;
 		newShooter.OnDeath += CheckEndGame;
 		return newShooter;
 	}
