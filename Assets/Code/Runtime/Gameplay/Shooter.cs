@@ -6,8 +6,9 @@ using Random = UnityEngine.Random;
 
 public class Shooter : MonoBehaviour
 {
+	[SerializeField] new SphereCollider collider;
 	[SerializeField] Transform bulletSpawnPoint;
-
+	
 	private int health;
 	public int Health
 	{
@@ -27,6 +28,8 @@ public class Shooter : MonoBehaviour
 	}
 	private float nextRotateTime;
 	private float nextShootTime;
+	public SphereCollider Collider
+		=> collider;
 
 	public event Action<int, int> OnHealthChanged;
 	public event Action OnDeath;

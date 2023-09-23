@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+	[SerializeField] new SphereCollider collider;
+
 	private float despawnTime;
 	private Vector3 direction;
 	public Vector3 Direction
@@ -17,6 +19,8 @@ public class Bullet : MonoBehaviour
 			direction = value.normalized;
 		}
 	}
+	public SphereCollider Collider
+		=> collider;
 
 	private void UpdateDespawnTime()
 	=> despawnTime = Time.time + Settings.Game.BulletLifetime;
@@ -32,14 +36,18 @@ public class Bullet : MonoBehaviour
 		=> transform.position += Time.deltaTime * Settings.Game.BulletSpeed * direction;
 	private bool CheckHit()
 	{
-		if (!Physics.CheckSphere(transform.position, Settings.Game.BulletRadius, GameManager.ShooterLayerMask))
+		Vector3 position = transform.position;
+		float radius = collider.radius;
+		LayerMask layerMask = GameManager.ShooterLayerMask;
+
+		if (!Physics.CheckSphere(position, radius, layerMask))
 			return false;
 
 		Collider[] colliders = new Collider[1];
-		Physics.OverlapSphereNonAlloc(transform.position, Settings.Game.BulletRadius, colliders, GameManager.ShooterLayerMask);
+		Physics.OverlapSphereNonAlloc(position, radius, colliders, layerMask);
 		Shooter hitShooter = colliders[0].GetComponent<Shooter>();
-		hitShooter.Health--;
 
+		hitShooter.Health--;
 		GameManager.Despawn(this);
 		return true;
 	}
