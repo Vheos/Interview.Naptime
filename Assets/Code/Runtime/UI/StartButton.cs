@@ -14,7 +14,7 @@ public class StartButton : MonoBehaviour
 
 	private void Awake()
 	{		
-		button = GetComponent<Button>();		
+		button = GetComponent<Button>();
 	}
 
 	private void OnEnable()
@@ -24,10 +24,10 @@ public class StartButton : MonoBehaviour
 		OnCubeToggleChanged(null, cubeToggleGroup.ActiveToggle);
 	}
 
-
 	private void OnDisable()
 	{
 		cubeToggleGroup.OnToggleChanged -= OnCubeToggleChanged;
+		button.onClick.RemoveListener(OnButtonClicked);
 	}
 
 	private void OnCubeToggleChanged(CubeToggle previousToggle, CubeToggle currentToggle)
@@ -41,6 +41,5 @@ public class StartButton : MonoBehaviour
 	{
 		int cubesToSpawn = cubeToggleGroup.ActiveToggle.Amount;
 		GameManager.StartGame(cubesToSpawn);
-
 	}
 }
