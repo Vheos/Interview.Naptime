@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
+		ShowMainMenu();
 	}
 	private void FixedUpdate()
 	{
@@ -28,14 +28,11 @@ public class GameManager : MonoBehaviour
 	}
 
 	static private GameManager instance;
-	private static int cameraDistance;
-
 	static public int ShooterLayerMask { get; private set; }
 
-	static private void ActivateScene(SceneName sceneName)
+	static public void ShowMainMenu()
 	{
-		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
-		SceneManager.SetActiveScene(gameScene);
+		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
 	}
 	static public void StartGame(int shootersToSpawn)
 	{
@@ -45,13 +42,13 @@ public class GameManager : MonoBehaviour
 		float shooterRadius = Settings.Game.ShooterPrefab.Collider.radius;
 		Helpers.FindSpawnPoints2D(shootersToSpawn, shooterRadius, shooterRadius, shooterRadius / 2f, out var spawnPoints, out var maxSpawnRadius);
 
-		StartCoroutine(SpawnShootersCoroutine(spawnPoints.Select(v => (Vector3)v), Settings.Game.ShooterSpawnInterval));
+		StartCoroutine(SpawnShootersCoroutine(spawnPoints, Settings.Game.ShooterSpawnInterval));
 
-		float cameraDistance = Helpers.CameraDistance(maxSpawnRadius * 2, instance.camera.fieldOfView);
+		float targetFrustumHeight = (maxSpawnRadius + shooterRadius) * 2;
+		float cameraDistance = Helpers.CameraDistance(targetFrustumHeight, instance.camera.fieldOfView);
 		instance.camera.SetDistance(Vector3.zero, cameraDistance);
 	}
-
-	static private IEnumerator SpawnShootersCoroutine(IEnumerable<Vector3> spawnPoints, float spawnInterval)
+	static private IEnumerator SpawnShootersCoroutine(IEnumerable<Vector2> spawnPoints, float spawnInterval)
 	{
 		foreach (var spawnPoint in spawnPoints)
 		{
@@ -60,7 +57,6 @@ public class GameManager : MonoBehaviour
 				yield return new WaitForSeconds(spawnInterval);
 		}
 	}
-
 	static private void CheckEndGame()
 	{
 		if (instance.shooterPool.ActiveComponentsCount <= 1)
@@ -72,10 +68,14 @@ public class GameManager : MonoBehaviour
 		instance.bulletPool.ReleaseAll();
 
 		ActivateScene(SceneName.Persistent);
-		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
+		instance.rootCanvas.ChangeScreen(UIScreen.GameOver);
 	}
-
-	private static Shooter SpawnShooter(Vector3 position)
+	static private void ActivateScene(SceneName sceneName)
+	{
+		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
+		SceneManager.SetActiveScene(gameScene);
+	}
+	static private Shooter SpawnShooter(Vector3 position)
 	{
 		Shooter newShooter = instance.shooterPool.Get();
 		newShooter.transform.position = position;
@@ -103,4 +103,6 @@ public class GameManager : MonoBehaviour
 		instance = null;
 		ShooterLayerMask = LayerMask.GetMask(Layers.Shooter.ToString());
 	}
+
+
 }
