@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 39208029ac8a1c944936637c2eb76137, type: 2}
+  - {fileID: 2100000, guid: db2dfe8eaa3c303468749d206e2491ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 39208029ac8a1c944936637c2eb76137, type: 2}
+  - {fileID: 2100000, guid: db2dfe8eaa3c303468749d206e2491ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc4e007b2ddd642998f19dbf31d19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 3915680246920853334}
   bulletSpawnPoint: {fileID: 9066817908155933340}
 --- !u!135 &3915680246920853334
 SphereCollider:
