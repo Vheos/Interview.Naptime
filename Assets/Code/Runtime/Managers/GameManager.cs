@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
 	private static void EndGame()
 	{
 		CanForceEndGame = false;
+
+		instance.StopAllCoroutines();
 		instance.shooterPool.ReleaseAll();
 		instance.bulletPool.ReleaseAll();
 
