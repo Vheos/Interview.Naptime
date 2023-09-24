@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private ShooterPool shooterPool;
 	[SerializeField] private BulletPool bulletPool;
 
+
 	private void Awake()
 	{
 		instance = this;
@@ -21,21 +23,17 @@ public class GameManager : MonoBehaviour
 		AddScene(SceneName.Game);
 		ShowMainMenu();
 	}
-	private void FixedUpdate()
+	private void Update()
 	{
+		if (CanForceEndGame && Keyboard.current.escapeKey.wasPressedThisFrame)
+			EndGame();
 		Time.timeScale = timeScale;
 	}
 
 	private static GameManager instance;
-	public static int ShooterLayerMask { get; private set; }
 
-	private void AddScene(SceneName sceneName) =>
-	SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Additive);
-	private static void ActivateScene(SceneName sceneName)
-	{
-		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
-		SceneManager.SetActiveScene(gameScene);
-	}
+	private static bool CanForceEndGame { get; set; }
+	public static int ShooterLayerMask { get; private set; }
 
 	public static void ShowMainMenu()
 	{
@@ -56,6 +54,8 @@ public class GameManager : MonoBehaviour
 		float targetFrustumHeight = (maxSpawnRadius + shooterRadius) * 2;
 		float cameraDistance = Helpers.CameraDistance(targetFrustumHeight, instance.camera.fieldOfView);
 		instance.camera.SetDistance(Vector3.zero, cameraDistance);
+
+		CanForceEndGame = true;
 	}
 	private static IEnumerator SpawnShootersCoroutine(IEnumerable<Vector2> spawnPoints, float spawnInterval)
 	{
@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 	}
 	private static void EndGame()
 	{
+		CanForceEndGame = false;
 		instance.shooterPool.ReleaseAll();
 		instance.bulletPool.ReleaseAll();
 
