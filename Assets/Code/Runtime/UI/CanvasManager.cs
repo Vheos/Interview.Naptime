@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Canvas))]
 public class CanvasManager : MonoBehaviour
 {
+	[SerializeField] private Canvas canvas;
 	[SerializeField] private Canvas startMenuCanvas;
 	[SerializeField] private Canvas gameOverCanvas;
-	private Canvas canvas;
+	
 
 	public bool IsVisible
 	{
@@ -40,10 +40,5 @@ public class CanvasManager : MonoBehaviour
 		IsVisible = true;
 		foreach (var subCanvas in AllCanvases)
 			subCanvas.gameObject.SetActive(subCanvas == visibleCanvas);
-	}
-
-	private void Awake()
-	{
-		canvas = GetComponent<Canvas>();
 	}
 }
