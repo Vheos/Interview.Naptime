@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
 	private static void HandleInput()
 	{
-		if (CanForceEndGame && Keyboard.current.escapeKey.wasPressedThisFrame)
+		if (IsPlaying && Keyboard.current.escapeKey.wasPressedThisFrame)
 			EndGame();
 
 		float scrollValue = Mouse.current.scroll.value.y;
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 	#region static
 	private static GameManager instance;
 
-	private static bool CanForceEndGame { get; set; }
+	public static bool IsPlaying { get; private set; }
 	public static int ShooterLayerMask { get; private set; }
 
 	public static void ShowMainMenu()
@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
 		float cameraDistance = Helpers.CameraDistance(targetFrustumHeight, instance.camera.fieldOfView);
 		instance.camera.SetDistance(Vector3.zero, cameraDistance);
 
-		CanForceEndGame = true;
+		instance.shooterPool.OnRelease += CheckEndGame;
+		IsPlaying = true;
 	}
 	private static IEnumerator SpawnShootersCoroutine(IEnumerable<Vector2> spawnPoints, float spawnInterval)
 	{
@@ -83,14 +84,15 @@ public class GameManager : MonoBehaviour
 				yield return new WaitForSeconds(spawnInterval);
 		}
 	}
-	private static void CheckEndGame()
+	private static void CheckEndGame(Shooter releasedShooter)
 	{
 		if (instance.shooterPool.ActiveComponentsCount <= 1)
 			EndGame();
 	}
 	private static void EndGame()
 	{
-		CanForceEndGame = false;
+		IsPlaying = false;
+		instance.shooterPool.OnRelease -= CheckEndGame;
 
 		instance.StopAllCoroutines();
 		instance.shooterPool.ReleaseAll();
@@ -104,7 +106,6 @@ public class GameManager : MonoBehaviour
 	{
 		Shooter newShooter = instance.shooterPool.Get();
 		newShooter.transform.position = position;
-		newShooter.OnDeath += CheckEndGame;
 		return newShooter;
 	}
 	public static Bullet SpawnBullet(Vector3 position, Vector3 direction)
@@ -115,10 +116,8 @@ public class GameManager : MonoBehaviour
 		return newBullet;
 	}
 	public static void Despawn(Shooter shooter)
-	{
-		shooter.OnDeath -= CheckEndGame;
-		instance.shooterPool.Release(shooter);
-	}
+		=> instance.shooterPool.Release(shooter);
+
 	public static void Despawn(Bullet bullet)
 		=> instance.bulletPool.Release(bullet);
 
