@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = nameof(GameSettings), menuName = "Settings/" + nameof(GameSettings))]
 public class GameSettings : ScriptableObject
-{ 
+{
 	[field: Header("General")]
 	[field: SerializeField] public bool UseTweens { get; private set; }
 

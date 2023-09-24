@@ -3,7 +3,6 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Shooter : MonoBehaviour
 {
