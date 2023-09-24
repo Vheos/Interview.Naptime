@@ -19,8 +19,8 @@ MonoBehaviour:
   <ShooterRotateInterval>k__BackingField: {x: 0, y: 1}
   <ShooterShootInterval>k__BackingField: 1
   <ShooterRespawnInterval>k__BackingField: 2
+  <ShooterSpawnDensity>k__BackingField: 1
   <ShooterSpawnInterval>k__BackingField: 0
   <BulletPrefab>k__BackingField: {fileID: 254529161373585011, guid: 67752b06c518cb145b903cbe3509606d, type: 3}
   <BulletSpeed>k__BackingField: 20
-  <BulletRadius>k__BackingField: 0
   <BulletLifetime>k__BackingField: 5

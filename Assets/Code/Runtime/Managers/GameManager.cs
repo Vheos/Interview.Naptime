@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour
 		ActivateScene(SceneName.Game);
 
 		float shooterRadius = Settings.Game.ShooterPrefab.Collider.radius;
-		Helpers.FindSpawnPoints2D(shootersToSpawn, shooterRadius, shooterRadius, shooterRadius / 2f, out var spawnPoints, out var maxSpawnRadius);
+		float spawnRadiusIncrement = shooterRadius / Mathf.Pow(2, Settings.Game.ShooterSpawnDensity);
+		Helpers.FindSpawnPointsInCircle(shootersToSpawn, shooterRadius, shooterRadius, spawnRadiusIncrement,
+			out var spawnPoints, out var maxSpawnRadius);
 
 		StartCoroutine(SpawnShootersCoroutine(spawnPoints, Settings.Game.ShooterSpawnInterval));
 
