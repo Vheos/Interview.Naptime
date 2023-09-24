@@ -52,5 +52,7 @@
 
 			@this.transform.position = direction * distance;
 		}
+		public static float RandomRange(this Vector2 @this)
+			=> Random.Range(@this.x, @this.y);
 	}
 }
