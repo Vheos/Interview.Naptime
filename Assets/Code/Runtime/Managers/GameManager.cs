@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
 	{
 		if (CanForceEndGame && Keyboard.current.escapeKey.wasPressedThisFrame)
 			EndGame();
+
+#if UNITY_EDITOR
 		Time.timeScale = timeScale;
+#endif
 	}
 
 	private static GameManager instance;
