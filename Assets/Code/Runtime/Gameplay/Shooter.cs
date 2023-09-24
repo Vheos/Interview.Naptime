@@ -18,10 +18,6 @@ public class Shooter : MonoBehaviour
 		{
 			int previousHealth = health;
 			health = value;
-			if (health == previousHealth)
-				return;
-
-			OnHealthChanged?.Invoke(previousHealth, health);
 
 			if (health < previousHealth)
 				GameManager.StartCoroutine(TakeDamageCoroutine());
@@ -31,9 +27,6 @@ public class Shooter : MonoBehaviour
 	private float nextShootTime;
 	public SphereCollider Collider
 		=> collider;
-
-	public event Action<int, int> OnHealthChanged;
-	public event Action OnDeath;
 
 	private void InitializeHealth()
 		=> health = Settings.Game.ShooterHealth;
@@ -76,7 +69,6 @@ public class Shooter : MonoBehaviour
 		if (Health <= 0)
 		{
 			GameManager.Despawn(this);
-			OnDeath?.Invoke();
 			yield break;
 		}
 
