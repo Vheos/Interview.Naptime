@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -14,6 +15,9 @@ public abstract class AComponentPool<T> : MonoBehaviour where T : MonoBehaviour
 		=> activeComponents;
 	public int ActiveComponentsCount
 	=> pool.CountActive;
+
+	public event Action<T> OnRelease;
+	public event Action<T> OnGet;
 
 	protected virtual T CreateFunc()
 	{
@@ -34,13 +38,14 @@ public abstract class AComponentPool<T> : MonoBehaviour where T : MonoBehaviour
 	{
 		T newComponent = pool.Get();
 		activeComponents.Add(newComponent);
+		OnGet?.Invoke(newComponent);
 		return newComponent;
 	}
 	public void Release(T component)
 	{
-
 		pool.Release(component);
 		activeComponents.Remove(component);
+		OnRelease?.Invoke(component);
 	}
 	public void ReleaseAll()
 	{
