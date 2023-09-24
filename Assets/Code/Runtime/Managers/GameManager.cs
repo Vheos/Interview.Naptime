@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
 
 	private void AddScene(SceneName sceneName) =>
 	SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Additive);
+	private static void ActivateScene(SceneName sceneName)
+	{
+		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
+		SceneManager.SetActiveScene(gameScene);
+	}
+
 	public static void ShowMainMenu()
 	{
 		instance.rootCanvas.ChangeScreen(UIScreen.StartMenu);
@@ -71,11 +77,7 @@ public class GameManager : MonoBehaviour
 		ActivateScene(SceneName.Persistent);
 		instance.rootCanvas.ChangeScreen(UIScreen.GameOver);
 	}
-	private static void ActivateScene(SceneName sceneName)
-	{
-		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
-		SceneManager.SetActiveScene(gameScene);
-	}
+
 	private static Shooter SpawnShooter(Vector3 position)
 	{
 		Shooter newShooter = instance.shooterPool.Get();
@@ -90,9 +92,11 @@ public class GameManager : MonoBehaviour
 		newBullet.Direction = direction;
 		return newBullet;
 	}
-
 	public static void Despawn(Shooter shooter)
-		=> instance.shooterPool.Release(shooter);
+	{
+		shooter.OnDeath -= CheckEndGame;
+		instance.shooterPool.Release(shooter);
+	}
 	public static void Despawn(Bullet bullet)
 		=> instance.bulletPool.Release(bullet);
 	public static new Coroutine StartCoroutine(IEnumerator enumerator)
