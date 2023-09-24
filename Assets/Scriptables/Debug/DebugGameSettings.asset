@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df5affabd6ecdc4ea3cd34c67c00119, type: 3}
   m_Name: DebugGameSettings
   m_EditorClassIdentifier: 
+  <UseTweens>k__BackingField: 0
   <ShooterPrefab>k__BackingField: {fileID: 3938704564891666966, guid: d8b747efd5aa3394eb6fb49f02d28fb1, type: 3}
   <ShooterHealth>k__BackingField: 1
   <ShooterRotateAngle>k__BackingField: {x: -90, y: 90}
