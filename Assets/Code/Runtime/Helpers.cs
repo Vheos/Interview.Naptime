@@ -16,19 +16,19 @@
 				return new Vector2(x, y);
 			}
 		}
-		public static void FindSpawnPoints2D(int objectCount, float objectRadius, float spawnRadius, float spawnRadiusIncrement,
-			out HashSet<Vector2> spawnPoints, out float maxSpawnRadius)
+		public static void FindSpawnPointsInCircle(int objectCount, float objectRadius, float spawnRadius, float spawnRadiusIncrement,
+			out List<Vector2> spawnPoints, out float maxSpawnRadius)
 		{
-			bool OverlapsAnotherSpawnPoint(Vector2 potentialSpawnPoint, IEnumerable<Vector2> spawnPoints)
+			bool OverlapsAnotherSpawnPoint(Vector2 potentialSpawnPoint, IList<Vector2> spawnPoints)
 			{
-				foreach (var spawnPoint in spawnPoints)
-					if (Vector2.Distance(potentialSpawnPoint, spawnPoint) <= objectRadius * 2)
+				for (int i = spawnPoints.Count - 1; i >= 0; i--)
+					if (Vector2.Distance(potentialSpawnPoint, spawnPoints[i]) <= objectRadius * 2)
 						return true;
 
 				return false;
 			}
 
-			spawnPoints = new();
+			spawnPoints = new List<Vector2>();
 			while (spawnPoints.Count < objectCount)
 			{
 				Vector2 potentialSpawnPoint = RandomPointOnUnitCircle * spawnRadius;
