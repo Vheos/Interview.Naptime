@@ -196,7 +196,6 @@ GameObject:
   - component: {fileID: 381111927}
   - component: {fileID: 381111925}
   - component: {fileID: 381111924}
-  - component: {fileID: 381111923}
   m_Layer: 5
   m_Name: CanvasManager
   m_TagString: Untagged
@@ -204,23 +203,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &381111923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381111922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &381111924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiSettings: {fileID: 11400000, guid: b44db4c980c2e5f46bd82c70c09403a0, type: 2}
-  gameSettings: {fileID: 11400000, guid: 723d81a562c681d45a093ed3b5770f9b, type: 2}
+  gameSettings: {fileID: 11400000, guid: cd35a39c7ec9cdc438e1aa7d241fe838, type: 2}
 --- !u!4 &989108355
 Transform:
   m_ObjectHideFlags: 0
@@ -918,9 +900,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1277,9 +1259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0.50980395, b: 0.90588236, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
