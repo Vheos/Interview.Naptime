@@ -70,7 +70,8 @@ public class Shooter : MonoBehaviour
 		Shoot();
 	}
 	private void Shoot()
-		=> GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward); private IEnumerator TakeDamageCoroutine()
+		=> GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward);
+	private IEnumerator TakeDamageCoroutine()
 	{
 		if (Health <= 0)
 		{
