@@ -54,8 +54,6 @@ public class CubeToggle : MonoBehaviour
 	private void Awake()
 	{
 		originalSprite = image.sprite;
-
-		text.fontSharedMaterial.SetColor(ShaderUtilities.ID_UnderlayColor, Settings.UI.FontShadow);
 		AddCallbackOnStateChanged(AnimateToggle);
 	}
 }

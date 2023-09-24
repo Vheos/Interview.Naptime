@@ -302,6 +302,8 @@ MonoBehaviour:
   canvas: {fileID: 7575351993422419079}
   startMenuCanvas: {fileID: 7288211557373119106}
   gameOverCanvas: {fileID: 5831833759330986423}
+  fontAtlasMaterial: {fileID: -8126053733631565859, guid: 72f119d845bf9604bb104288b62a8d6d, type: 2}
+  backgroundImage: {fileID: 5436140536845857089}
 --- !u!223 &7575351993422419079
 Canvas:
   m_ObjectHideFlags: 0
