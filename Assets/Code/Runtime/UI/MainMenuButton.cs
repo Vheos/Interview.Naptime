@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuButton : MonoBehaviour
 {
-	[SerializeField] Button button;
-	[SerializeField] Image icon;
+	[SerializeField] private Button button;
+	[SerializeField] private Image icon;
 
 	private void OnButtonClicked()
 	{

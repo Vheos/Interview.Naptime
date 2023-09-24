@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 3915680246920853334}
+  visuals: {fileID: 5963969292852335852}
   bulletSpawnPoint: {fileID: 9066817908155933340}
 --- !u!135 &3915680246920853334
 SphereCollider:

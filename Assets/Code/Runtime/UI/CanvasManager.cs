@@ -1,13 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(Canvas))]
 public class CanvasManager : MonoBehaviour
 {
+	[SerializeField] private Canvas canvas;
 	[SerializeField] private Canvas startMenuCanvas;
 	[SerializeField] private Canvas gameOverCanvas;
-	private Canvas canvas;
+	[SerializeField] private Material fontAtlasMaterial;
+	[SerializeField] private Image backgroundImage;
 
 	public bool IsVisible
 	{
@@ -45,6 +47,7 @@ public class CanvasManager : MonoBehaviour
 
 	private void Awake()
 	{
-		canvas = GetComponent<Canvas>();
+		backgroundImage.color = Settings.UI.MainBackground;
+		fontAtlasMaterial.SetColor(ShaderUtilities.ID_UnderlayColor, Settings.UI.FontShadow);
 	}
 }

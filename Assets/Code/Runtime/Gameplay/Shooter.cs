@@ -1,14 +1,14 @@
-using System;
+using Assets.Code.Runtime;
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Shooter : MonoBehaviour
 {
-	[SerializeField] new SphereCollider collider;
-	[SerializeField] Transform bulletSpawnPoint;
-	
+	[SerializeField] private new SphereCollider collider;
+	[SerializeField] private GameObject visuals;
+	[SerializeField] private Transform bulletSpawnPoint;
+
 	private int health;
 	public int Health
 	{
@@ -17,10 +17,6 @@ public class Shooter : MonoBehaviour
 		{
 			int previousHealth = health;
 			health = value;
-			if (health == previousHealth)
-				return;
-
-			OnHealthChanged?.Invoke(previousHealth, health);
 
 			if (health < previousHealth)
 				GameManager.StartCoroutine(TakeDamageCoroutine());
@@ -31,43 +27,47 @@ public class Shooter : MonoBehaviour
 	public SphereCollider Collider
 		=> collider;
 
-	public event Action<int, int> OnHealthChanged;
-	public event Action OnDeath;
-
-	private void InitializeHealth()
+	private void ResetHealth()
 		=> health = Settings.Game.ShooterHealth;
 	private void UpdateNextRotateTime()
 	{
-		Vector2 intervalRange = Settings.Game.ShooterRotateInterval;
-		float interval = Random.Range(intervalRange.x, intervalRange.y);
-		nextRotateTime = Time.time + interval;
+		nextRotateTime = Time.time + Settings.Game.ShooterRotateInterval.RandomRange();
 	}
-	private void UpdateNextShootTime()
-		=> nextShootTime = Time.time + Settings.Game.ShooterShootInterval;
 	private void CheckRotate()
 	{
 		if (Time.time < nextRotateTime)
 			return;
 
-		Vector2 angleRange = Settings.Game.ShooterRotateAngle;
-		float angle = Random.Range(angleRange.x, angleRange.y);
-		transform.Rotate(Vector3.forward, angle, Space.World);
 		UpdateNextRotateTime();
+		Rotate();
 	}
+	private void Rotate()
+	{
+		float angle = Settings.Game.ShooterRotateAngle.RandomRange();
+		Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward) * transform.rotation;
+
+		if (Settings.Game.UseTweens)
+			transform.DORotateQuaternion(targetRotation, nextRotateTime - Time.time);
+		else
+			transform.rotation = targetRotation;
+	}
+	private void UpdateNextShootTime()
+		=> nextShootTime = Time.time + Settings.Game.ShooterShootInterval;
 	private void CheckShoot()
 	{
 		if (Time.time < nextShootTime)
 			return;
 
-		GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward);
 		UpdateNextShootTime();
+		Shoot();
 	}
+	private void Shoot()
+		=> GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward);
 	private IEnumerator TakeDamageCoroutine()
 	{
 		if (Health <= 0)
 		{
 			GameManager.Despawn(this);
-			OnDeath?.Invoke();
 			yield break;
 		}
 
@@ -75,15 +75,20 @@ public class Shooter : MonoBehaviour
 		yield return new WaitForSeconds(Settings.Game.ShooterRespawnInterval);
 		if (this != null)
 			gameObject.SetActive(true);
-
 	}
 
-	private void Awake()
+	public void Initialize(Vector3 position)
 	{
-		InitializeHealth();
+		transform.position = position;
+		ResetHealth();
 	}
 	private void OnEnable()
 	{
+		if (Settings.Game.UseTweens)
+		{
+			visuals.transform.localScale = Vector3.zero;
+			visuals.transform.DOScale(1f, 1f);
+		}
 		UpdateNextRotateTime();
 		UpdateNextShootTime();
 	}

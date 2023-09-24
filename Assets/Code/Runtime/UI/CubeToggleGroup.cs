@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ToggleGroup))]
 public class CubeToggleGroup : MonoBehaviour
 {
+	[SerializeField] private ToggleGroup toggleGroup;
 	private List<CubeToggle> toggles;
 	public CubeToggle ActiveToggle { get; private set; }
 	public event Action<CubeToggle, CubeToggle> OnToggleChanged;
@@ -25,7 +23,6 @@ public class CubeToggleGroup : MonoBehaviour
 
 	private void Awake()
 	{
-		ToggleGroup toggleGroup = GetComponent<ToggleGroup>();
 		toggles = new List<CubeToggle>();
 
 		// Cache settings

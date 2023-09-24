@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [DefaultExecutionOrder(-1)]
 public class Settings : MonoBehaviour
 {
-    [SerializeField] UISettings uiSettings;
-	[SerializeField] GameSettings gameSettings;
+	[SerializeField] private UISettings uiSettings;
+	[SerializeField] private GameSettings gameSettings;
 
 	private void Awake()
 	{
@@ -14,11 +12,11 @@ public class Settings : MonoBehaviour
 		Game = gameSettings;
 	}
 
-	static public UISettings UI { private set; get; }
-	static public GameSettings Game { private set; get; }
+	public static UISettings UI { private set; get; }
+	public static GameSettings Game { private set; get; }
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-	static private void StaticInitialize()
+	private static void StaticInitialize()
 	{
 		UI = null;
 		Game = null;

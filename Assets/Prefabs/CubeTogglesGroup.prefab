@@ -51,8 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcee0d12f4307542b7ede681290ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeTogglePrefab: {fileID: 8045731487570979629, guid: 9bdfdf03dcba8204181f6d2400aa09ee, type: 3}
-  settings: {fileID: 11400000, guid: b44db4c980c2e5f46bd82c70c09403a0, type: 2}
+  toggleGroup: {fileID: 2663346268347364963}
 --- !u!114 &2663346268347364963
 MonoBehaviour:
   m_ObjectHideFlags: 0

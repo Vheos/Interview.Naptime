@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad17e2e2a4690744a07a8b55733980d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 697280145129268219}
+  image: {fileID: 5567329410341261034}
   icon: {fileID: 8056543798527782972}
   text: {fileID: 8253631600809041746}
   selectedSprite: {fileID: 21300000, guid: 222dc4aa58cac60429e043c8963581fb, type: 3}

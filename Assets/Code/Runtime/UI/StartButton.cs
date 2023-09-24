@@ -1,14 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour
 {
-	[SerializeField] Button button;
-	[SerializeField] Image icon;
-	[SerializeField] CubeToggleGroup cubeToggleGroup;
+	[SerializeField] private Button button;
+	[SerializeField] private Image icon;
+	[SerializeField] private CubeToggleGroup cubeToggleGroup;
 
 	private void OnCubeToggleChanged(CubeToggle previousToggle, CubeToggle currentToggle)
 	{
