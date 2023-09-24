@@ -15,6 +15,22 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private ShooterPool shooterPool;
 	[SerializeField] private BulletPool bulletPool;
 
+	private static void HandleInput()
+	{
+		if (CanForceEndGame && Keyboard.current.escapeKey.wasPressedThisFrame)
+			EndGame();
+
+		float scrollValue = Mouse.current.scroll.value.y;
+		if (scrollValue > 0)
+			Time.timeScale *= 1.1f;
+		if (scrollValue < 0)
+			Time.timeScale /= 1.1f;
+
+		if (Keyboard.current.spaceKey.wasPressedThisFrame)
+			Time.timeScale = 10f;
+		else if (Keyboard.current.spaceKey.wasReleasedThisFrame)
+			Time.timeScale = 1f;
+	}
 
 	private void Awake()
 	{
@@ -25,14 +41,12 @@ public class GameManager : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (CanForceEndGame && Keyboard.current.escapeKey.wasPressedThisFrame)
-			EndGame();
-
-#if UNITY_EDITOR
-		Time.timeScale = timeScale;
-#endif
+		HandleInput();
 	}
 
+
+
+	#region static
 	private static GameManager instance;
 
 	private static bool CanForceEndGame { get; set; }
@@ -126,4 +140,5 @@ public class GameManager : MonoBehaviour
 		instance = null;
 		ShooterLayerMask = LayerMask.GetMask(Layers.Shooter.ToString());
 	}
+	#endregion
 }
