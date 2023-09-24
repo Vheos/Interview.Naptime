@@ -1,6 +1,5 @@
 using Assets.Code.Runtime;
 using DG.Tweening;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -28,7 +27,7 @@ public class Shooter : MonoBehaviour
 	public SphereCollider Collider
 		=> collider;
 
-	private void InitializeHealth()
+	private void ResetHealth()
 		=> health = Settings.Game.ShooterHealth;
 	private void UpdateNextRotateTime()
 	{
@@ -76,12 +75,12 @@ public class Shooter : MonoBehaviour
 		yield return new WaitForSeconds(Settings.Game.ShooterRespawnInterval);
 		if (this != null)
 			gameObject.SetActive(true);
-
 	}
 
-	private void Awake()
+	public void Initialize(Vector3 position)
 	{
-		InitializeHealth();
+		transform.position = position;
+		ResetHealth();
 	}
 	private void OnEnable()
 	{

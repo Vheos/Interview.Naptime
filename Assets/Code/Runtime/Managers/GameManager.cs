@@ -105,19 +105,17 @@ public class GameManager : MonoBehaviour
 	private static Shooter SpawnShooter(Vector3 position)
 	{
 		Shooter newShooter = instance.shooterPool.Get();
-		newShooter.transform.position = position;
+		newShooter.Initialize(position);
 		return newShooter;
 	}
 	public static Bullet SpawnBullet(Vector3 position, Vector3 direction)
 	{
 		Bullet newBullet = instance.bulletPool.Get();
-		newBullet.transform.position = position;
-		newBullet.Direction = direction;
+		newBullet.Initialize(position, direction);
 		return newBullet;
 	}
 	public static void Despawn(Shooter shooter)
 		=> instance.shooterPool.Release(shooter);
-
 	public static void Despawn(Bullet bullet)
 		=> instance.bulletPool.Release(bullet);
 

@@ -6,17 +6,6 @@ public class Bullet : MonoBehaviour
 
 	private float despawnTime;
 	private Vector3 direction;
-	public Vector3 Direction
-	{
-		get => direction;
-		set
-		{
-			if (value == Vector3.zero)
-				return;
-
-			direction = value.normalized;
-		}
-	}
 	public SphereCollider Collider
 		=> collider;
 
@@ -50,6 +39,11 @@ public class Bullet : MonoBehaviour
 		return true;
 	}
 
+	public void Initialize(Vector3 position, Vector3 direction)
+	{
+		transform.position = position;
+		this.direction = direction.normalized;
+	}
 	private void OnEnable()
 	{
 		UpdateDespawnTime();
