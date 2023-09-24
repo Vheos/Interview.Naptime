@@ -52,13 +52,23 @@ obiektów.
 
 ## Wytyczne
 - [x] UI tylko z dostarczonych assetów
-- [ ] oceniana będzie optymalizacja
+- [x] oceniana będzie optymalizacja
+  > Zastosowane optymalizacje:
+  > - Object pooling (osobno dla obiektów i pocisków)
+  > - Dynamic batching + tylko 1 shader
+  > - GPU instancing
+  > - Wykrywanie kolizji: `Physics.CheckSphere` + `Physics.OverlapSphereNonAlloc`
+  > - Canvas grouping
+  > - Heurystyczny algorytm znajdowania niezajętego miejsca spawnu
+  > - 1x `GetComponent()` + 0x `FindXYZ()`
+  > - Eventy zamiast pollingu w `Update`
+  > - Wyłączony domain reloading (optymalizacja czasu iteracji projektu, nie samego runtime'u)
 - [x] obiekt:
   - [x] spawnuje się w losowym widocznym miejscu
+  > Po spawnowaniu kamera jest oddalana tak, aby uchwycić wszystkie obiekty
   - [x] nie dotyka innych obiektów
   - [x] posiada 3 życia
   - [x] obiekty i pociski mają wizualną reprezentacje
-
 
 ## Opis gry
 - [x] Gra rozpoczyna się poprzez wyświetlenie okna wyboru liczby obiektów
@@ -81,11 +91,21 @@ obiektów.
   - [x] obiekt traci 1 życie
   - [x] jeżeli obiekt nadal ma więcej niż 1 życie, respawnuje się po 2 sekundach
 - [x] Gra kończy się jak zostanie tylko 1 obiekt
-- [x] Po zakończeniu gry pojawia się przycisk "Main menu", który wraca do wyboru liczby obiektów
+- [x] Po zakończeniu gry pojawia się okno z przyciskiem "Main menu", który wraca do wyboru liczby obiektów
 <details><summary>mockup</summary>
   
 ![Mockup3](https://github.com/Vheos/Interview.Naptime/assets/9155825/cdf16ff1-ca2c-45d1-aa4e-780e4fbeae5f)
 </details>
 
-## Komentarz
-- ...
+## Sterowanie
+Debugowe, zostało dodane dla ułatwienia testowania:
+- `Escape` - wymuszenie stanu gry "Game Over"
+- `Mouse Scroll Up` - przyspieszenie rozgrywki o 10%
+- `Mouse Scroll Down` - spowolnienie rozgrywki o 10%
+
+## Konfiguracja
+W folderze `Assets/Scriptables` są 2 SO - `GameSettings` oraz `UISettings`
+</br></br>
+  ![image](https://github.com/Vheos/Interview.Naptime/assets/9155825/927a4c37-14dd-42bf-aa22-391f1a90b9d0) ![image](https://github.com/Vheos/Interview.Naptime/assets/9155825/92f58718-308d-45d9-9b02-e7862549a325)
+
+
