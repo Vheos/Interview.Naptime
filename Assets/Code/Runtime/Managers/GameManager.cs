@@ -107,8 +107,18 @@ public class GameManager : MonoBehaviour
 	}
 	public static void Despawn(Bullet bullet)
 		=> instance.bulletPool.Release(bullet);
+
 	public static new Coroutine StartCoroutine(IEnumerator enumerator)
 		=> ((MonoBehaviour)instance).StartCoroutine(enumerator);
+	public static new void StopCoroutine(IEnumerator enumerator)
+		=> ((MonoBehaviour)instance).StopCoroutine(enumerator);
+	private void AddScene(SceneName sceneName) =>
+	SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Additive);
+	private static void ActivateScene(SceneName sceneName)
+	{
+		Scene gameScene = SceneManager.GetSceneByName(sceneName.ToString());
+		SceneManager.SetActiveScene(gameScene);
+	}
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 	private static void StaticInitialize()
