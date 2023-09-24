@@ -1,3 +1,5 @@
+using Assets.Code.Runtime;
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -6,6 +8,7 @@ using Random = UnityEngine.Random;
 public class Shooter : MonoBehaviour
 {
 	[SerializeField] private new SphereCollider collider;
+	[SerializeField] private GameObject visuals;
 	[SerializeField] private Transform bulletSpawnPoint;
 
 	private int health;
@@ -37,31 +40,38 @@ public class Shooter : MonoBehaviour
 		=> health = Settings.Game.ShooterHealth;
 	private void UpdateNextRotateTime()
 	{
-		Vector2 intervalRange = Settings.Game.ShooterRotateInterval;
-		float interval = Random.Range(intervalRange.x, intervalRange.y);
-		nextRotateTime = Time.time + interval;
+		nextRotateTime = Time.time + Settings.Game.ShooterRotateInterval.RandomRange();
 	}
-	private void UpdateNextShootTime()
-		=> nextShootTime = Time.time + Settings.Game.ShooterShootInterval;
 	private void CheckRotate()
 	{
 		if (Time.time < nextRotateTime)
 			return;
 
-		Vector2 angleRange = Settings.Game.ShooterRotateAngle;
-		float angle = Random.Range(angleRange.x, angleRange.y);
-		transform.Rotate(Vector3.forward, angle, Space.World);
 		UpdateNextRotateTime();
+		Rotate();
 	}
+	private void Rotate()
+	{
+		float angle = Settings.Game.ShooterRotateAngle.RandomRange();
+		Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward) * transform.rotation;
+
+		if (Settings.Game.UseTweens)
+			transform.DORotateQuaternion(targetRotation, nextRotateTime - Time.time);
+		else
+			transform.rotation = targetRotation;
+	}
+	private void UpdateNextShootTime()
+		=> nextShootTime = Time.time + Settings.Game.ShooterShootInterval;
 	private void CheckShoot()
 	{
 		if (Time.time < nextShootTime)
 			return;
 
-		GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward);
 		UpdateNextShootTime();
+		Shoot();
 	}
-	private IEnumerator TakeDamageCoroutine()
+	private void Shoot()
+		=> GameManager.SpawnBullet(bulletSpawnPoint.position, transform.forward); private IEnumerator TakeDamageCoroutine()
 	{
 		if (Health <= 0)
 		{
@@ -83,6 +93,11 @@ public class Shooter : MonoBehaviour
 	}
 	private void OnEnable()
 	{
+		if (Settings.Game.UseTweens)
+		{
+			visuals.transform.localScale = Vector3.zero;
+			visuals.transform.DOScale(1f, 1f);
+		}
 		UpdateNextRotateTime();
 		UpdateNextShootTime();
 	}
